@@ -4,8 +4,7 @@ import { instance } from './axios'
 import rest from '@feathersjs/rest-client'
 
 const restClient = rest()
+app.configure(restClient.axios(instance))
 
 // "async" is optional
-export default async (context) => {
-  app.configure(restClient.axios(instance))
-}
+export default async (context) => { }

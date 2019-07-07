@@ -12,8 +12,9 @@ module.exports = function (ctx) {
       'axios',
       'components',
       'feathers',
-      { path: 'feathers-client', server: false },
-      { path: 'feathers-server', server: true }
+      'feathers-client'
+      // { path: 'feathers-client', server: false },
+      // { path: 'feathers-server', server: true }
     ],
 
     css: [
