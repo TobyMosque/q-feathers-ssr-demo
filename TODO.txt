@@ -1,0 +1,18 @@
+1. npm i -g @quasar/cli@latest
+2. npm i -g knex@latest
+2. quasar create q-feathers
+3. quasar mode add ssr
+4. yarn add @feathersjs/feathers uberproto
+5. inject feathers on express
+6. yarn add objection knex pg
+7. create knexfile.js in src/entities
+8. knex migrate:make initial
+9. knex seed:make initial
+10. knex migrate:latest
+11. knex seed:run
+12. yarn add feathers-swagger
+13. add ui
+14. yarn add @feathersjs/rest-client
+15. create boots
+16. yarn add @feathersjs/errors
+17. validate entities
