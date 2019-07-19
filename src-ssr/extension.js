@@ -10,7 +10,7 @@
  * Note: Changes to this file (but not any file it imports!) are picked up by the
  * development server, but such updates are costly since the dev-server needs a reboot.
  */
-const express = require('@toby.mosque/feathersjs-express')
+const express = require('@feathersjs/express')
 const feathers = require('@feathersjs/feathers')
 const swagger = require('feathers-swagger')
 const path = require('path')

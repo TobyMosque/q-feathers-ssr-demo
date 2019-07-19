@@ -4,7 +4,7 @@ const LoginHooks = {
   before: {
     async create (context) {
       let signup = context.data
-      let required = ['name', 'username', 'password', 'confirm'].reduce((errors, key) => {
+      let required = ['username', 'password'].reduce((errors, key) => {
         if (!signup[key]) {
           errors[key] = `${key} is required`
         }

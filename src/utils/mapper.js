@@ -16,8 +16,12 @@ export const mapState = function (module, properties) {
   if (Array.isArray(properties)) {
     properties.forEach(property => {
       props[property] = {
-        get () { return this.$store.state[module][property] },
-        set (value) { this.$store.commit(`${module}/${property}`, value) }
+        get () {
+          return this.$store.state[module][property]
+        },
+        set (value) {
+          this.$store.commit(`${module}/${property}`, value)
+        }
       }
     })
   } else {

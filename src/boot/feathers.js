@@ -1,6 +1,17 @@
 // import something here
 import feathers from '@feathersjs/feathers'
-const app = feathers()
+
+class Service {
+  feathers = feathers()
+  get login () {
+    return this.feathers.service('/api/login')
+  }
+  get signup () {
+    return this.feathers.service('/api/signup')
+  }
+}
+
+const app = new Service()
 
 // "async" is optional
 export default async ({ Vue }) => {

@@ -5,6 +5,7 @@ import { mapActions } from 'vuex'
 
 const moduleName = 'signup'
 const keys = Object.keys(new SignUp())
+
 export default {
   name: 'SignUpIndex',
   preFetch ({ store }) {

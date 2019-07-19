@@ -1,4 +1,4 @@
-export default function ({ name, component, setup }) {
+export default function ({ name, component, render, setup }) {
   const props = component.options.props
   const computed = {}
   if (props.value) {
@@ -15,7 +15,7 @@ export default function ({ name, component, setup }) {
     return methods
   }, {})
 
-  return {
+  let options = {
     name: name,
     props: props,
     methods: methods,
@@ -37,15 +37,19 @@ export default function ({ name, component, setup }) {
           self.__value = value
         }
         options.props = props
-        options.listeners = listeners
+        options.on = listeners
       } else {
         options.props = this.$props
-        options.listeners = this.$listeners
+        options.on = this.$listeners
       }
-      if (setup) {
-        setup({ h, self, options })
+      if (render) {
+        render({ h, self, options })
       }
       return h(component, options)
     }
   }
+  if (setup) {
+    setup({ options })
+  }
+  return options
 }

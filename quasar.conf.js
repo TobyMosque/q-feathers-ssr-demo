@@ -1,6 +1,7 @@
 // Configuration for your app
 // https://quasar.dev/quasar-cli/quasar-conf-js
 var webpack = require('webpack')
+var dotenv = require('dotenv')
 
 module.exports = function (ctx) {
   return {
@@ -12,9 +13,8 @@ module.exports = function (ctx) {
       'axios',
       'components',
       'feathers',
-      'feathers-client'
-      // { path: 'feathers-client', server: false },
-      // { path: 'feathers-server', server: true }
+      { path: 'feathers-client', server: false },
+      { path: 'feathers-server', client: false }
     ],
 
     css: [
@@ -65,6 +65,7 @@ module.exports = function (ctx) {
       // Quasar plugins
       plugins: [
         'Notify',
+        'Loading',
         'Screen'
       ]
     },
@@ -79,6 +80,11 @@ module.exports = function (ctx) {
       // analyze: true,
       // extractCSS: false,s
       extendWebpack (cfg, { isServer }) {
+        if (isServer) {
+          const env = dotenv.config({ path: './server.env' })
+          const plugin = new webpack.EnvironmentPlugin(env.parsed)
+          cfg.plugins.push(plugin)
+        }
         cfg.plugins.push(new webpack.IgnorePlugin(/package\.json/, /mssql/))
 
         cfg.module.rules.push({
