@@ -1,5 +1,6 @@
 import LogIn from 'src/models/login'
 import { app } from 'src/boot/feathers'
+import { service } from 'src/boot/axios'
 import { createMutations } from 'src/utils/mapper'
 
 export default {
@@ -12,8 +13,9 @@ export default {
     initialize () {
       console.log('login/initialize')
     },
-    async login ({ state }) {
-      await app.login.create(state)
+    async login ({ state, rootState, commit }) {
+      commit('app/token', await app.login.create(state))
+      service.setToken(rootState.app.token)
     }
   }
 }
