@@ -14,8 +14,9 @@ export default {
       console.log('login/initialize')
     },
     async login ({ state, rootState, commit }) {
-      commit('app/token', await app.login.create(state))
+      commit('app/token', await app.login.create(state), { root: true })
       service.setToken(rootState.app.token)
+      console.log(rootState.app.token)
     }
   }
 }

@@ -86,8 +86,7 @@ module.exports = function (ctx) {
           const plugin = new webpack.EnvironmentPlugin(env.parsed)
           cfg.plugins.push(plugin)
         }
-        cfg.resolve.alias['quasar/dist/quasar.styl'] = path.join(__dirname, '/src/css/placebo.styl')
-        console.log()
+        // cfg.resolve.alias['quasar/dist/quasar.styl'] = path.join(__dirname, '/src/css/placebo.styl')
         cfg.plugins.push(new webpack.IgnorePlugin(/package\.json/, /mssql/))
         cfg.module.rules.push({
           enforce: 'pre',
