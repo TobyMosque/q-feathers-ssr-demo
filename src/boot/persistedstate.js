@@ -7,7 +7,10 @@ export default function ({ store, ssrContext }) {
     : Cookies
 
   createPersistedState({
-    paths: ['app/token'],
+    paths: ['auth'],
+    filter ({ type }) {
+      return type.startsWith('auth')
+    },
     storage: {
       getItem (key) {
         return JSON.stringify(cookies.get(key))
@@ -20,4 +23,12 @@ export default function ({ store, ssrContext }) {
       }
     }
   })(store)
+
+  if (!ssrContext) {
+    createPersistedState({
+      paths: ['brand']
+    })(store)
+  }
+
+  console.log(store.state.auth.token)
 }

@@ -2,7 +2,6 @@
 // https://quasar.dev/quasar-cli/quasar-conf-js
 var webpack = require('webpack')
 var dotenv = require('dotenv')
-var path = require('path')
 
 module.exports = function (ctx) {
   return {
@@ -10,7 +9,9 @@ module.exports = function (ctx) {
     // --> boot files are part of "main.js"
     preFetch: true,
     boot: [
+      'brand',
       'i18n',
+      'persistedstate',
       'axios',
       'components',
       'feathers',
@@ -65,6 +66,7 @@ module.exports = function (ctx) {
 
       // Quasar plugins
       plugins: [
+        'Cookies',
         'Notify',
         'Loading',
         'Screen'

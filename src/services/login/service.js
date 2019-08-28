@@ -1,4 +1,5 @@
 // const Roles = require('../../entities/roles')
+const uuid = require('@toby.mosque/quasar-app-extension-utils/src/uuid')
 const UsersRoles = require('../../entities/users_roles')
 const Users = require('../../entities/users')
 const utils = require('../../utils')
@@ -22,7 +23,7 @@ const LoginService = {
       .column({ name: 'role.name' })
       .select()
     console.log(roles)
-    let jti = utils.comb()
+    let jti = uuid.comb()
     let token = await utils.signJwt({
       jti: jti,
       sub: user.user_id,

@@ -5,14 +5,18 @@
 </template>
 
 <script>
-import App from 'src/models/app'
-import { mapState } from 'src/utils/mapper'
+import { store } from '@toby.mosque/utils'
+import Brand from 'src/models/brand'
+const { mapState } = store
 
-const keys = Object.keys(new App())
+const keys = Object.keys(new Brand())
 export default {
   name: 'AuthLayout',
+  mounted () {
+    console.log(this.$q.cookies)
+  },
   computed: {
-    ...mapState('app', keys)
+    ...mapState('brand', keys)
   }
 }
 </script>

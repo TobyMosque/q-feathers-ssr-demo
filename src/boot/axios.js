@@ -1,33 +1,35 @@
 import axios from 'axios'
+import { i18n } from './i18n'
 import { Loading, Notify } from 'quasar'
 
 class RestService {
   count = 0
   axios = void 0
-  token = void 0
+  store = void 0
   constructor () {
     let self = this
     this.axios = axios.create()
     this.axios.interceptors.request.use(function (config) {
-      if (self.token) {
-        config.headers.authorization = `bearer ${self.token}`
+      let token = self.store.state.auth.token
+      if (token) {
+        config.headers.authorization = `bearer ${token}`
       }
       self.showLoad()
       return config
     }, function (error) {
-      self.hideLoad('Danger, Will Robinson! Danger!')
+      self.hideLoad(i18n.$t('app.error'))
       return Promise.reject(error)
     })
     this.axios.interceptors.response.use(function (response) {
       self.hideLoad()
       return response
     }, function (error) {
-      self.hideLoad('Danger, Will Robinson! Danger!')
+      self.hideLoad(i18n.$t('app.error'))
       return Promise.reject(error)
     })
   }
-  setToken (token) {
-    this.token = token
+  configure (store) {
+    this.store = store
   }
   showLoad () {
     if (this.count++ === 0) {
@@ -46,7 +48,7 @@ class RestService {
 
 const service = new RestService()
 export default async ({ Vue, store, router }) => {
-  service.setToken(store.state.app.token)
+  service.configure({ store })
   Vue.prototype.$axios = service.axios
 }
 

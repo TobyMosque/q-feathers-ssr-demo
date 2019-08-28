@@ -4,6 +4,7 @@ const UsersRoles = require('../../entities/users_roles')
 const Users = require('../../entities/users')
 const required = [ 'name', 'username', 'password', 'confirm' ]
 const utils = require('../../utils')
+const uuid = require('@toby.mosque/quasar-app-extension-utils/src/uuid')
 const { transaction } = require('objection')
 
 const SignupService = {
@@ -12,8 +13,8 @@ const SignupService = {
     let pass = await utils.scrypt(data.password, salt, 64)
     let role = await Roles.query().where({ name: 'user' }).first()
     await transaction(knex, async (trx) => {
-      let userId = utils.comb()
-      let roleId = utils.comb()
+      let userId = uuid.comb()
+      let roleId = uuid.comb()
       let _user = {
         user_id: userId,
         name: data.name,
