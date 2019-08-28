@@ -1,4 +1,4 @@
-import { QInput } from 'quasar'
+import { QInput, QList, QItem } from 'quasar'
 import { factory } from '@toby.mosque/utils'
 const { component } = factory
 
@@ -16,7 +16,13 @@ factories.field = {
 }
 
 const group = {}
-group.field = { 'q-input': QInput }
+group.base = {
+  'q-list': QList,
+  'q-item': QItem
+}
+group.field = {
+  'q-input': QInput
+}
 
 // "async" is optional
 export default async ({ Vue }) => {
@@ -26,6 +32,16 @@ export default async ({ Vue }) => {
       name: base.options.name,
       component: base,
       factories: [ factories.base, factories.field ]
+    })
+    Vue.component(key, branded)
+  }
+
+  for (let key in group.base) {
+    let base = group.base[key]
+    let branded = component({
+      name: base.options.name,
+      component: base,
+      factories: [ factories.base ]
     })
     Vue.component(key, branded)
   }

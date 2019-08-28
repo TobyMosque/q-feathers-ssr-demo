@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
+  <q-layout view="lHh Lpr lFf" class="bg-main">
     <q-header elevated>
       <q-toolbar>
         <q-btn
@@ -23,7 +23,7 @@
     <q-drawer
       v-model="leftDrawerOpen"
       bordered
-      content-class="bg-grey-2"
+      content-class="bg-content"
     >
       <q-list>
         <q-item-label header>Essential Links</q-item-label>
